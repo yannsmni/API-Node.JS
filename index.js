@@ -38,6 +38,14 @@ app.get('/users/:email', (req, res) => {
     })
 })
 
+app.get('/users/:id', (req, res) => {
+    var id = req.params.id;
+    sqlconnection.query("SELECT * FROM users WHERE email = ?", id, (error, resultats) => {
+        if (error) throw error;
+        res.json(resultats)
+    })
+})
+
 app.post('/users', (req, res) => {
     sqlconnection.query('INSERT INTO users (`id`, `nom`, `prenom`, `localisation`, `email`, `mot_de_passe`, `date_creation`, `role`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)', [req.body.nom, req.body.prenom, req.body.localisation, req.body.email, req.body.mot_de_passe, req.body.date_creation, req.body.role], (error, resultats) => {
         if (error) throw error;

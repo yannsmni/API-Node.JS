@@ -40,7 +40,7 @@ app.get('/users/:email', (req, res) => {
 
 app.get('/users/:id', (req, res) => {
     var id = req.params.id;
-    sqlconnection.query("SELECT * FROM users WHERE email = ?", id, (error, resultats) => {
+    sqlconnection.query("SELECT * FROM users WHERE id = ?", id, (error, resultats) => {
         if (error) throw error;
         res.json(resultats)
     })
